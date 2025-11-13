@@ -1,49 +1,39 @@
 "use client";
-import { motion } from "framer-motion";
 import Image from "next/image";
+import { useAnimateOnScroll } from "../hooks/useAnimateOnScroll";
 
 export function Dedication() {
-  return (
-    <section className="min-h-screen flex items-center justify-center bg-white">
-      <div className="container flex flex-row gap-12 items-center">
-        <motion.div
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex justify-center"
-        >
-          <div className="relative">
+  const imageRef = useAnimateOnScroll("fadeInUp", 0.3, 0);
+  const textRef = useAnimateOnScroll("fadeInUp", 0.3, 200);
 
+  return (
+    <section className="min-h-screen flex items-center justify-center bg-white py-12 sm:py-16 lg:py-0">
+      <div className="container flex flex-col lg:flex-row gap-8 lg:gap-12 items-center px-4 sm:px-6 lg:px-8">
+        <div
+          ref={imageRef}
+          className="opacity-0 flex justify-center w-full lg:w-1/2 order-1 lg:order-1"
+        >
+          <div className="relative max-w-md lg:max-w-full">
             <div className="relative z-10">
               <Image
                 src="/main-tree.png"
                 alt="Дерево ответственности"
                 width={854}
                 height={912}
-                // className="
-                //   drop-shadow-2xl
-                //   filter
-                //   brightness-105
-                //   contrast-105
-                //   hover:scale-105
-                //   transition-transform
-                //   duration-300
-                // "
+                className="w-full h-auto"
               />
             </div>
           </div>
-        </motion.div>
-        <motion.div
-          initial={{ x: 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className=" items-end flex flex-col gap-6 max-w-[854px]"
+        </div>
+        <div
+          ref={textRef}
+          className="opacity-0 flex flex-col gap-4 sm:gap-6 w-full lg:w-1/2 order-2 lg:order-2 items-center lg:items-end text-center lg:text-right"
         >
-          <h1 className="text-6xl font-bold text-[#11181C] leading-[60px] text-right">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#11181C] leading-tight sm:leading-normal">
             Мужчина — это{" "}
             <span className="text-[#17C964]">не про «бороду отрастил»</span>.
           </h1>
-          <p className="text-2xl text-[#3F3F46] leading-8 text-right">
+          <p className="text-base sm:text-lg lg:text-xl xl:text-2xl text-[#3F3F46] leading-relaxed">
             Это про ответственность.
             <br />
             Один мальчик сажает одно дерево — и в этот момент у него
@@ -55,20 +45,13 @@ export function Dedication() {
             <br />
             Не в теории, не в «когда-нибудь», а здесь и сейчас.
           </p>
-          <motion.button
-            className="py-3 px-6 cursor-pointer bg-[#006FEE] text-white rounded-full hover:bg-blue-600 transition-all duration-200 shadow-lg hover:shadow-xl text-sm"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 10px 30px rgba(0, 111, 238, 0.3)",
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <button className="py-3 px-6 cursor-pointer bg-[#006FEE] text-white rounded-full hover:bg-blue-600 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm sm:text-base w-full sm:w-auto">
             Записаться на посвящение
-          </motion.button>
-          <div className=" leading-6 text-[#52525B] text-right -mt-3">
+          </button>
+          <div className="text-sm sm:text-base lg:text-lg text-[#52525B] -mt-2">
             5 000 ₽ — вклад в лес и в<br /> характер ребёнка
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
