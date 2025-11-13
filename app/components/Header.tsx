@@ -1,12 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { useAnimateOnScroll } from "../hooks/useAnimateOnScroll";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const headerRef = useAnimateOnScroll("fadeInDown", 0.3, 0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,8 +19,7 @@ export function Header() {
 
   return (
     <header
-      ref={headerRef}
-      className={`fixed top-4 sm:top-6 left-1/2 transform -translate-x-1/2 z-50 py-2 sm:py-3 px-4 sm:px-6 backdrop-blur-lg transition-all duration-300 rounded-2xl sm:rounded-[100px] w-[calc(100%-32px)] sm:w-[calc(100%-48px)] max-w-6xl border border-white/20 opacity-0 ${
+      className={`fixed top-4 sm:top-6 left-1/2 transform -translate-x-1/2 z-50 py-2 sm:py-3 px-4 sm:px-6 backdrop-blur-lg transition-all duration-300 rounded-2xl sm:rounded-[100px] w-[calc(100%-32px)] sm:w-[calc(100%-48px)] max-w-6xl border border-white/20 ${
         isScrolled ? "bg-white/95 shadow-lg" : "bg-gray-200/40 shadow-sm"
       }`}
     >
@@ -33,13 +30,12 @@ export function Header() {
           </h2>
         </div>
 
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-12">
-          {menuItems.map((item, index) => (
+        <nav className="hidden lg:flex items-center gap-8 xl:gap-16">
+          {menuItems.map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase().replace(" ", "-")}`}
-              className="text-gray-700 hover:text-[#006FEE] transition-all duration-200 text-sm font-medium relative group cursor-pointer animate__animated animate__fadeInDown"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="text-gray-700 hover:text-[#006FEE] transition-all duration-200 text-sm font-medium relative group"
             >
               {item}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#006FEE] transition-all duration-200 group-hover:w-full"></span>
@@ -47,35 +43,35 @@ export function Header() {
           ))}
         </nav>
 
-        <button className="hidden lg:block py-2 sm:py-2.5 px-4 bg-[#006FEE] text-white rounded-full hover:bg-blue-600 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm font-medium cursor-pointer animate__animated animate__fadeInDown">
+        <button className="hidden lg:block py-2.5 px-4 bg-[#006FEE] text-white rounded-full hover:bg-blue-600 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm font-medium">
           Заказать звонок
         </button>
 
         <div className="lg:hidden flex items-center gap-2">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-gray-700 hover:text-[#006FEE] transition-colors duration-200 cursor-pointer"
+            className="p-2 text-gray-700 hover:text-[#006FEE] transition-colors duration-200"
           >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden mt-3 pb-2 animate__animated animate__fadeIn">
-          <nav className="flex flex-col gap-2">
+        <div className="lg:hidden mt-4 pb-2">
+          <nav className="flex flex-col gap-3">
             {menuItems.map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase().replace(" ", "-")}`}
-                className="text-gray-700 hover:text-[#006FEE] transition-all duration-200 py-2 px-3 rounded-lg hover:bg-gray-100 font-medium cursor-pointer"
+                className="text-gray-700 hover:text-[#006FEE] transition-all duration-200 py-2 px-3 rounded-lg hover:bg-gray-100 font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item}
               </a>
             ))}
             <button
-              className="py-2.5 px-4 bg-[#006FEE] text-white rounded-full hover:bg-blue-600 transition-all duration-200 shadow-lg mt-2 text-sm font-medium cursor-pointer"
+              className="py-2.5 px-4 bg-[#006FEE] text-white rounded-full hover:bg-blue-600 transition-all duration-200 shadow-lg mt-2 text-sm font-medium"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Заказать звонок
